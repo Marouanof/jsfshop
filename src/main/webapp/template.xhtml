@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<f:view>
+    <h:head>
+        <title>E-Commerce</title>
+        <style>
+            /* Styles intégrés pour éviter l'erreur CSS */
+            body {
+                font-family: 'Arial', sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f5f5f5;
+            }
+            .ui-container {
+                min-height: 70vh;
+                padding: 20px;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            .p-toolbar {
+                background-color: #2c3e50 !important;
+                color: white !important;
+                border: none !important;
+                border-radius: 0 !important;
+            }
+            .p-toolbar a {
+                color: white !important;
+                text-decoration: none;
+            }
+            .footer {
+                text-align: center;
+                padding: 20px;
+                background-color: #34495e;
+                color: white;
+                margin-top: 40px;
+            }
+            .login-container, .register-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 60vh;
+            }
+            .feature-card {
+                text-align: center;
+                margin: 10px;
+                height: 150px;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <p:growl id="growl" showDetail="true" />
+
+        <!-- Header avec formulaire -->
+        <h:form id="headerForm">
+            <p:toolbar>
+                <f:facet name="left">
+                    <p:commandLink value="E-COMMERCE" action="index" immediate="true"
+                                   style="font-size: 24px; font-weight: bold; text-decoration: none; color: white;"/>
+                </f:facet>
+
+                <f:facet name="right">
+                    <p:commandLink value="Accueil" action="index" immediate="true" style="margin-right: 15px;"/>
+                    <p:commandLink value="Produits" action="products" immediate="true" style="margin-right: 15px;"/>
+
+                    <p:commandLink value="Panier (#{cartBean.itemCount})" action="cart"
+                                   style="margin-right: 15px;" rendered="#{userBean.currentUser != null}" immediate="true"/>
+
+                    <p:commandLink value="Mes Commandes" action="orders"
+                                   rendered="#{userBean.currentUser != null}" style="margin-right: 15px;" immediate="true"/>
+
+                    <p:commandLink value="Admin" action="admin"
+                                   rendered="#{userBean.currentUser != null}" style="margin-right: 15px;" immediate="true"/>
+
+                    <p:commandLink value="Connexion" action="login"
+                                   rendered="#{userBean.currentUser == null}" style="margin-right: 15px;" immediate="true"/>
+
+                    <p:commandLink value="Inscription" action="register"
+                                   rendered="#{userBean.currentUser == null}" style="margin-right: 15px;" immediate="true"/>
+
+                    <p:commandLink value="Déconnexion" action="#{userBean.logout}"
+                                   rendered="#{userBean.currentUser != null}" immediate="true"/>
+                </f:facet>
+            </p:toolbar>
+        </h:form>
+
+        <!-- Contenu principal -->
+        <div class="ui-container">
+            <ui:insert name="content">Contenu par défaut</ui:insert>
+        </div>
+
+        <!-- Footer -->
+        <p:separator />
+        <div class="footer">
+            <h:outputText value="© 2024 E-Commerce - Tous droits réservés" />
+        </div>
+    </h:body>
+</f:view>
+</html>

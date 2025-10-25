@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<f:view>
+    <h:head>
+        <title>Panier - E-Commerce</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template.xhtml">
+            <ui:define name="content">
+                <h:form id="cartForm">
+                    <h1>Mon Panier</h1>
+
+                    <p:dataTable value="#{cartBean.cartItems}" var="item"
+                                 emptyMessage="Votre panier est vide"
+                                 rendered="#{not empty cartBean.cartItems}">
+                        <p:column headerText="Produit">
+                            <h:outputText value="#{item.product.nom}" />
+                        </p:column>
+
+                        <p:column headerText="Prix unitaire">
+                            <h:outputText value="#{item.product.prix} €" />
+                        </p:column>
+
+                        <p:column headerText="Quantité">
+                            <p:spinner value="#{item.quantite}" min="1" max="#{item.product.stock}"
+                                       size="3" style="width: 60px;">
+                                <p:ajax event="change" update="cartForm" />
+                            </p:spinner>
+                        </p:column>
+
+                        <p:column headerText="Total">
+                            <h:outputText value="#{item.product.prix * item.quantite} €" />
+                        </p:column>
+
+                        <p:column headerText="Action">
+                            <p:commandButton icon="pi pi-trash" title="Supprimer"
+                                             action="#{cartBean.removeFromCart(item.id)}"
+                                             update="cartForm" />
+                        </p:column>
+                    </p:dataTable>
+
+                    <div class="cart-summary" rendered="#{not empty cartBean.cartItems}">
+                        <p:panel>
+                            <f:facet name="header">
+                                Récapitulatif de la commande
+                            </f:facet>
+
+                            <p:panelGrid columns="2">
+                                <h:outputText value="Sous-total:" />
+                                <h:outputText value="#{cartBean.total} €" />
+
+                                <h:outputText value="Livraison:" />
+                                <h:outputText value="Gratuite" />
+
+                                <h:outputText value="Total:" style="font-weight: bold;" />
+                                <h:outputText value="#{cartBean.total} €" style="font-weight: bold;" />
+                            </p:panelGrid>
+
+                            <p:commandButton value="Passer la commande"
+                                             action="#{orderBean.createOrder}"
+                                             style="width: 100%; margin-top: 20px;"
+                                             icon="pi pi-check"
+                                             update=":growl"/>
+                        </p:panel>
+                    </div>
+
+                    <div class="empty-cart" rendered="#{empty cartBean.cartItems}">
+                        <p:panel>
+                            <h:outputText value="Votre panier est vide" />
+                            <br/>
+                            <p:commandButton value="Continuer mes achats" action="products" immediate="true"/>
+                        </p:panel>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</f:view>
+</html>

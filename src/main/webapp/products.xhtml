@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<f:view>
+    <h:head>
+        <title>Produits - E-Commerce</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template.xhtml">
+            <ui:define name="content">
+                <h:form id="productsForm">
+                    <h1>Nos Produits</h1>
+
+                    <!-- Barre de recherche -->
+                    <p:toolbar style="margin-bottom: 20px;">
+                        <f:facet name="left">
+                            <p:inputText value="#{productBean.searchTerm}" placeholder="Rechercher un produit..."
+                                         style="width: 300px;">
+                                <p:ajax event="keyup" update="productsPanel" />
+                            </p:inputText>
+                        </f:facet>
+                    </p:toolbar>
+
+                    <!-- Grille des produits -->
+                    <p:dataGrid id="productsPanel" value="#{productBean.products}" var="product"
+                                columns="3" paginator="true" rows="9">
+                        <p:panel header="#{product.nom}" style="text-align: center; height: 400px; margin: 10px;">
+                            <p:graphicImage value="/resources/images/default-product.jpg"
+                                            style="width: 100px; height: 100px;" />
+                            <br/>
+                            <h:outputText value="#{product.description}"
+                                          style="display: block; margin: 10px 0; height: 60px; overflow: hidden;"/>
+                            <br/>
+                            <h:outputText value="#{product.prix} €"
+                                          style="font-size: 18px; font-weight: bold; color: #2E8B57;"/>
+                            <br/>
+                            <h:outputText value="Stock: #{product.stock}"
+                                          style="font-size: 12px; color: #666;"/>
+                            <br/>
+
+                            <p:commandButton value="Ajouter au panier" icon="pi pi-cart-plus"
+                                             action="#{cartBean.addToCart(product.id, 1)}"
+                                             rendered="#{userBean.currentUser != null and product.stock > 0}"
+                                             update=":growl"
+                                             style="margin-top: 10px;"/>
+                        </p:panel>
+                    </p:dataGrid>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</f:view>
+</html>

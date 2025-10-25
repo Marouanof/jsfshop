@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+             https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+
+    <persistence-unit name="EcommercePU" transaction-type="JTA">
+        <jta-data-source>java:jboss/datasources/EcommerceDS</jta-data-source>
+
+        <!-- Liste explicite des entités -->
+        <class>org.example.jsfshop.models.User</class>
+        <class>org.example.jsfshop.models.Category</class>
+        <class>org.example.jsfshop.models.Product</class>
+        <class>org.example.jsfshop.models.Cart</class>
+        <class>org.example.jsfshop.models.CartItem</class>
+        <class>org.example.jsfshop.models.Order</class>
+        <class>org.example.jsfshop.models.OrderItem</class>
+
+        <properties>
+            <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
+            <property name="jakarta.persistence.sql-load-script-source" value="META-INF/import.sql"/>
+            <property name="hibernate.hbm2ddl.import_files" value="/META-INF/import.sql"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.use_sql_comments" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>

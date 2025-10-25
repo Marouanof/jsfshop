@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<f:view>
+    <h:head>
+        <title>Connexion - E-Commerce</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template.xhtml">
+            <ui:define name="content">
+                <div class="login-container">
+                    <p:card style="width: 400px; margin: 50px auto;">
+                        <f:facet name="title">
+                            Connexion
+                        </f:facet>
+
+                        <h:form id="loginForm">
+                            <p:panelGrid columns="2" style="width: 100%;">
+                                <p:outputLabel for="email" value="Email *" />
+                                <p:inputText id="email" value="#{userBean.email}"
+                                             required="true" requiredMessage="Email obligatoire"/>
+
+                                <p:outputLabel for="password" value="Mot de passe *" />
+                                <p:password id="password" value="#{userBean.password}"
+                                            required="true" requiredMessage="Mot de passe obligatoire"/>
+                            </p:panelGrid>
+
+                            <p:commandButton value="Se connecter" action="#{userBean.login}"
+                                             style="width: 100%; margin-top: 20px;"
+                                             update=":growl, loginForm"/>
+
+                            <p:separator />
+
+                            <p:commandButton value="Créer un compte" action="register"
+                                             style="width: 100%;" immediate="true"/>
+                        </h:form>
+                    </p:card>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</f:view>
+</html>

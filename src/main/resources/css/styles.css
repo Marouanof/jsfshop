@@ -1,0 +1,95 @@
+/* Styles généraux */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+.ui-container {
+    min-height: 70vh;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+.p-toolbar {
+    background-color: #2c3e50 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+.p-toolbar a {
+    color: white !important;
+    text-decoration: none;
+}
+
+/* Cartes */
+.feature-card {
+    text-align: center;
+    margin: 10px;
+    height: 150px;
+}
+
+.hero-section {
+    text-align: center;
+    margin: 40px 0;
+}
+
+/* Produits */
+.products-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Panier */
+.cart-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.cart-summary {
+    margin-top: 30px;
+    max-width: 400px;
+    float: right;
+}
+
+/* Login/Register */
+.login-container, .register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #34495e;
+    color: white;
+    margin-top: 40px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .ui-container {
+        padding: 10px;
+    }
+
+    .cart-summary {
+        float: none;
+        max-width: 100%;
+    }
+
+    .p-panelgrid.ui-panelgrid {
+        display: block;
+    }
+
+    .p-panelgrid.ui-panelgrid .ui-panelgrid-cell {
+        display: block;
+        width: 100% !important;
+    }
+}

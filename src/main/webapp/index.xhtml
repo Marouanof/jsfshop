@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<f:view>
+    <h:head>
+        <title>Accueil - E-Commerce</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template.xhtml">
+            <ui:define name="content">
+                <h:form id="indexForm">
+                    <div class="hero-section">
+                        <p:panel header="Bienvenue sur notre boutique en ligne">
+                            <h:outputText value="Découvrez nos produits exceptionnels" style="font-size: 18px;"/>
+                            <br/>
+                            <p:commandButton value="Voir les produits" action="products" icon="pi pi-shopping-cart" immediate="true"/>
+                        </p:panel>
+                    </div>
+
+                    <div class="features">
+                        <p:panelGrid columns="3" style="width: 100%;">
+                            <p:panel header="Livraison Rapide" styleClass="feature-card">
+                                <h:outputText value="Livraison gratuite pour toute commande supérieure à 50€"/>
+                            </p:panel>
+
+                            <p:panel header="Paiement Sécurisé" styleClass="feature-card">
+                                <h:outputText value="Paiement 100% sécurisé avec cryptage SSL"/>
+                            </p:panel>
+
+                            <p:panel header="Support 24/7" styleClass="feature-card">
+                                <h:outputText value="Notre équipe est disponible pour vous aider"/>
+                            </p:panel>
+                        </p:panelGrid>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</f:view>
+</html>
